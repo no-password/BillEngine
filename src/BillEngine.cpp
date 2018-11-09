@@ -1,9 +1,12 @@
 #include "BillEngine.h"
 
+#include <iostream>
+
+GLfloat BillEngine::floorHeight = DEFAULT_FLOOR_HEIGHT;
+BillEngineMap *BillEngine::currentMap = nullptr;
+
 void BillEngine::init() {
-	BillEngine::floorHeight = DEFAULT_FLOOR_HEIGHT;
-	BillEngine::currentMap = nullptr;
-	BillEngine::initOpenGL();
+	initOpenGL();
 }
 
 /* initialize opneGL */

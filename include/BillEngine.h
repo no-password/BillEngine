@@ -8,7 +8,6 @@
 
 class BillEngine {
 	private:
-		/* is abtract class, do not want isntances of this */
 		BillEngine() {}
 
 		//floor texture
@@ -44,5 +43,6 @@ class BillEngine {
 		 */
 		static int closeMap();
 };
+
 
 #endif
