@@ -5,8 +5,13 @@
 GLfloat BillEngine::floorHeight = DEFAULT_FLOOR_HEIGHT;
 BillEngineMap *BillEngine::currentMap = nullptr;
 
-void BillEngine::init() {
+int BillEngine::init() {
 	initOpenGL();
+	if (!glfwInit()) {
+		return -1;
+	}
+
+	return 0;
 }
 
 /* initialize opneGL */
@@ -25,3 +30,30 @@ void BillEngine::initOpenGL()
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
 }
+
+/* render the 'floor' */
+void BillEngine::drawFloor()
+{
+	float i,j;
+	char flag = 0;
+	for (i = -20.0f; i < 20.0f; i+=1.0f)
+	{
+		for (j = -20.0f; j < 20.0f; j+=1.0f)
+		{
+			if (flag == 0)
+				glColor3f(0.15f, 0.15f, 0.7f);
+			else
+				glColor3f(0.15f, 0.7f, 0.15f);
+			flag = flag == 0 ? 1 : 0;
+			glBegin(GL_QUADS);
+			glVertex3f(i, floorHeight, j);
+			glVertex3f(i, floorHeight, j + 1.0f);
+			glVertex3f(i + 1.0f, floorHeight, j + 1.0f);
+			glVertex3f(i + 1.0f, floorHeight, j);
+			glEnd();
+			//printf("i = %f, j = %f\n", i, j);
+		}
+		flag = flag == 0 ? 1 : 0;
+	}
+}
+

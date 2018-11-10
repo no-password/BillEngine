@@ -4,7 +4,7 @@
 #include "common.h"
 #include "BillEngineMap.h"
 
-#define DEFAULT_FLOOR_HEIGHT 0.0f
+#define DEFAULT_FLOOR_HEIGHT -1.0f
 
 class BillEngine {
 	private:
@@ -21,7 +21,7 @@ class BillEngine {
 		/**
 		 * Initialize OpenGL, amongst other things
 		 */
-		static void init();
+		static int init();
 
 		/**
 		 * Set the floor texture
@@ -42,6 +42,8 @@ class BillEngine {
 		 * Close the current map
 		 */
 		static int closeMap();
+
+		static void drawFloor();
 };
 
 
