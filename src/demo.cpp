@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <unordered_map>
+#include <cstdlib>
 
 void keyboard(GLFWwindow* window, int key, int scancode, int action, int mods);
 
@@ -62,6 +63,9 @@ void keyboard(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
 	switch (action) {
 		case (GLFW_PRESS):
+			if (key == GLFW_KEY_ESCAPE) {
+				exit(EXIT_SUCCESS);
+			}
 			keyPressMap->insert_or_assign(key, true);
 			break;
 

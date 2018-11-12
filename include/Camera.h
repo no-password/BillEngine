@@ -9,12 +9,14 @@
 class Camera {
 	private:
 		Camera() {
+			angle = 0.0f;
 		}
 	
 	public:
 		Point3D focalPoint;
 		Point3D position;
 		Point3D upDirection;
+		GLfloat angle;
 
 		static Camera* getCamera();
 		void lookFirstPerson();

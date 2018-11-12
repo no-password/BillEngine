@@ -4,6 +4,9 @@
 #include "common.h"
 #include <unordered_map>
 
+/**
+ * Contains callback function for user input into a window
+*/
 class ControlScheme {
 	private:
 		ControlScheme() {

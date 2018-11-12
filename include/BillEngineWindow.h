@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include "ControlScheme.h"
+#include "Geometry.h"
 
 class BillEngineWindow {
 	private:
@@ -10,6 +11,7 @@ class BillEngineWindow {
 		int height;
 		std::string title;
 		GLFWwindow *glfwWindow;
+
 	public:
 		BillEngineWindow(int widthIn, int heightIn, std::string title);
 		int focus();
@@ -30,6 +32,7 @@ class BillEngineWindow {
 
 		static void reshape(GLFWwindow *w, int width, int height);
 		static void framebufferSize(GLFWwindow *w, int width, int height);
+		static void mouseLookCallback(GLFWwindow *w, double xpos, double ypos);
 };
 
 #endif
