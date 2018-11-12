@@ -27,3 +27,7 @@ $(TARGET): $(OBJ)
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.$(SRC_EXT)
 	@echo "$(CXX) $(CXX_FLAGS) $(INCLUDE) -c -o $@ $<"
 	$(CXX) $(CXX_FLAGS) $(INCLUDE) -c -o $@ $<
+
+
+clean:
+	$(MESS)

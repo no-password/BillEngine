@@ -17,6 +17,8 @@ class BillEngine {
 		/* Auxillary methods */
 		static void initOpenGL();
 
+		static void initGlew();
+
 	public:
 		/**
 		 * Initialize OpenGL, amongst other things
@@ -32,6 +34,7 @@ class BillEngine {
 		 * Set the floor height
 		 */
 		static int setFloorHeight(GLfloat height);
+		static GLfloat getFloorHeight();
 
 		/**
 		 * Launch a map

@@ -11,6 +11,13 @@ BillEngineWindow::BillEngineWindow(int widthIn, int heightIn, std::string titleI
 	glfwWindow = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
 	glfwSetWindowSizeCallback(glfwWindow, reshape);
 	glfwSetFramebufferSizeCallback(glfwWindow, framebufferSize);
+	framebufferSize(glfwWindow, width, height);
+	reshape(glfwWindow, width, height);
+}
+
+void BillEngineWindow::render() {
+	framebufferSize(glfwWindow, width, height);
+	reshape(glfwWindow, width, height);
 }
 
 int BillEngineWindow::getWidth() {
@@ -40,4 +47,12 @@ void BillEngineWindow::framebufferSize(GLFWwindow *w, int width, int height)
 {  
   glViewport(0, 0, width, height);
 	std::cout << "fb" << std::endl;
+}
+
+void BillEngineWindow::swapBuffers() {
+	glfwSwapBuffers(glfwWindow);
+}
+
+void BillEngineWindow::setContext() {
+	glfwMakeContextCurrent(glfwWindow);
 }

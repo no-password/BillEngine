@@ -1,12 +1,14 @@
 #include "BillEngine.h"
 
 #include <iostream>
+#include <cstdio>
 
 GLfloat BillEngine::floorHeight = DEFAULT_FLOOR_HEIGHT;
 BillEngineMap *BillEngine::currentMap = nullptr;
 
 int BillEngine::init() {
 	initOpenGL();
+	initGlew();
 	if (!glfwInit()) {
 		return -1;
 	}
@@ -31,6 +33,11 @@ void BillEngine::initOpenGL()
     glEnableClientState(GL_COLOR_ARRAY);
 }
 
+void BillEngine::initGlew() {
+	glewInit();
+	glewExperimental = GL_TRUE;
+}
+
 /* render the 'floor' */
 void BillEngine::drawFloor()
 {
@@ -51,9 +58,17 @@ void BillEngine::drawFloor()
 			glVertex3f(i + 1.0f, floorHeight, j + 1.0f);
 			glVertex3f(i + 1.0f, floorHeight, j);
 			glEnd();
-			//printf("i = %f, j = %f\n", i, j);
+			//printf("Floor: i = %f, j = %f\n", i, j);
 		}
 		flag = flag == 0 ? 1 : 0;
 	}
 }
 
+int BillEngine::setFloorHeight(GLfloat height) {
+	floorHeight = height;
+	return 0;
+}
+
+GLfloat BillEngine::getFloorHeight() {
+	return floorHeight;
+}

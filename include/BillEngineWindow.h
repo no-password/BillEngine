@@ -18,6 +18,13 @@ class BillEngineWindow {
 
 		bool windowShouldClose();
 
+		/* OpenGL activly renders one buffer. and draws to another one in the backgroud */
+		void swapBuffers();
+
+		void setContext();
+
+		void render();
+
 		static void reshape(GLFWwindow *w, int width, int height);
 		static void framebufferSize(GLFWwindow *w, int width, int height);
 };

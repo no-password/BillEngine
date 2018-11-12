@@ -15,6 +15,8 @@ class Camera {
 		Point3D upDirection;
 
 		static Camera* getCamera();
+		void lookFirstPerson();
+		void lookTopDown();
 };
 
 #endif
