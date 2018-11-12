@@ -56,3 +56,7 @@ void BillEngineWindow::swapBuffers() {
 void BillEngineWindow::setContext() {
 	glfwMakeContextCurrent(glfwWindow);
 }
+
+void BillEngineWindow::setControlScheme(ControlScheme *scheme) {
+	glfwSetKeyCallback(glfwWindow, scheme->keyboardCallback);
+}

@@ -5,7 +5,7 @@ else
 LDFLAGS=-lX11 -lGL -lGLU -lglut -lGLEW -lglfw
 endif
 
-CXX_FLAGS=-lm -Wall
+CXX_FLAGS=-lm -Wall -std=c++17
 CXX=g++
 
 SRC_DIR=src

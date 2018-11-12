@@ -42,3 +42,35 @@ void Camera::lookTopDown() {
 	instance->upDirection.z = 0.0f;
 }
 
+void Camera::moveBasedOnKeyPressMap(const std::unordered_map<int, bool>* keyPressMap /*pointer b/c do not want to copy this*/) {
+	for (const auto& entry: *keyPressMap) {
+		if (entry.second == true) {
+			switch (entry.first) {
+				case (GLFW_KEY_W):
+					instance->position.z -= 0.05f;
+					instance->focalPoint.z -= 0.05f;
+					break;
+				case (GLFW_KEY_S):
+					instance->position.z += 0.05f;
+					instance->focalPoint.z += 0.05f;
+					break;
+				case (GLFW_KEY_A):
+					instance->position.x -= 0.05f;
+					instance->focalPoint.x -= 0.05f;
+					break;
+				case (GLFW_KEY_D):
+					instance->position.x += 0.05f;
+					instance->focalPoint.x += 0.05f;
+					break;
+				case (GLFW_KEY_SPACE):
+					instance->position.y += 0.05f;
+					instance->focalPoint.y += 0.05f;
+					break;
+				case (GLFW_KEY_LEFT_SHIFT):
+					instance->position.y -= 0.05f;
+					instance->focalPoint.y -= 0.05f;
+					break;
+			}
+		}
+	}
+}

@@ -2,6 +2,7 @@
 #define BILLENGINEWINDOW_H
 
 #include "common.h"
+#include "ControlScheme.h"
 
 class BillEngineWindow {
 	private:
@@ -24,6 +25,8 @@ class BillEngineWindow {
 		void setContext();
 
 		void render();
+
+		void setControlScheme(ControlScheme *scheme);
 
 		static void reshape(GLFWwindow *w, int width, int height);
 		static void framebufferSize(GLFWwindow *w, int width, int height);
