@@ -6,4 +6,15 @@
 #include <climits>
 #include <string>
 
+/* Camera defaults */
+#define  CAM_DEF_LOC_X 0.0f
+#define  CAM_DEF_LOC_Y 0.0f
+#define  CAM_DEF_LOC_Z 3.0f
+#define  CAM_DEF_FOC_X 0.0f
+#define  CAM_DEF_FOC_Y 0.0f
+#define  CAM_DEF_FOC_Z 0.0f
+#define  CAM_DEF_UP_X 0.0f
+#define  CAM_DEF_UP_Y 1.0f
+#define  CAM_DEF_UP_Z 0.0f
+
 #endif

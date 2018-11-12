@@ -1,5 +1,5 @@
 #ifndef BILLENGINE_H_INCLUDED
-#define BILLENGIN_H
+#define BILLENGINE_H
 
 #include "common.h"
 #include "BillEngineMap.h"

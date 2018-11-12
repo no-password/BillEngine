@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BILLENGINEWINDOW_H_INCLUDED
+#define BILLENGINEWINDOW_H
 
 #include "common.h"
 
@@ -14,4 +15,11 @@ class BillEngineWindow {
 		int reshape(int widht, int height);
 		int getWidth();
 		int getHeight();
+
+		bool windowShouldClose();
+
+		static void reshape(GLFWwindow *w, int width, int height);
+		static void framebufferSize(GLFWwindow *w, int width, int height);
 };
+
+#endif
