@@ -26,7 +26,7 @@ void BillEngine::initOpenGL()
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45, 1, 1, INT_MAX);
+    gluPerspective(45, 1, 0.1f, 1.0f);
     glMatrixMode(GL_MODELVIEW);
 
     glEnableClientState(GL_VERTEX_ARRAY);
@@ -43,9 +43,9 @@ void BillEngine::drawFloor()
 {
 	float i,j;
 	char flag = 0;
-	for (i = -20.0f; i < 20.0f; i+=1.0f)
+	for (i = -20.0f; i < 20.0f; i+=0.3f)
 	{
-		for (j = -20.0f; j < 20.0f; j+=1.0f)
+		for (j = -20.0f; j < 20.0f; j+=0.3f)
 		{
 			if (flag == 0)
 				glColor3f(0.15f, 0.15f, 0.7f);

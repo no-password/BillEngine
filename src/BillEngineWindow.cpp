@@ -56,7 +56,6 @@ void BillEngineWindow::reshape(GLFWwindow *w, int width, int height)
 void BillEngineWindow::framebufferSize(GLFWwindow *w, int width, int height)
 {  
   glViewport(0, 0, width, height);
-	std::cout << "fb" << std::endl;
 }
 
 void BillEngineWindow::swapBuffers() {
@@ -65,6 +64,7 @@ void BillEngineWindow::swapBuffers() {
 
 void BillEngineWindow::setContext() {
 	glfwMakeContextCurrent(glfwWindow);
+	glfwSetInputMode(glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
 void BillEngineWindow::setControlScheme(ControlScheme *scheme) {
@@ -78,24 +78,9 @@ void BillEngineWindow::mouseLookCallback(GLFWwindow *w, double xpos, double ypos
 
 	/* Set the focal point to the origin, rotate about the origin, translate the positin back */
 	if (dMouseX != 0) {
-		std::cout << "Here!" << std::endl;
-		double theta = dMouseX > 0 ? -1.0f : 1.0f;
-		double camFocAtOriginX = camera->focalPoint.x - camera->position.x;
-		double camFocAtOriginZ = camera->focalPoint.z - camera->position.z;
-
-		double newCamFocAtOriginX = camFocAtOriginZ * sin(d2r(theta)) + camFocAtOriginX * cos(d2r(theta));
-		double newCamFocAtOriginZ = camFocAtOriginZ * cos(d2r(theta)) - camFocAtOriginX * sin(d2r(theta));
-
-		camera->focalPoint.x = newCamFocAtOriginX + camera->position.x;
-		camera->focalPoint.z = newCamFocAtOriginZ + camera->position.z;
-		camera->angle += theta;
+		double theta = dMouseX > 0 ? 1.5f : -1.5f;
+		camera->rotateFocalPointAboutPositionHorizontal(theta);
 	}
-	std::cout << "mouse callback old: \nX: " << previousMousePosition.x <<
-	"\nY: " << previousMousePosition.y << std::endl;
-
 	previousMousePosition.x = xpos;
 	previousMousePosition.y = ypos;
-	
-	std::cout << "mouse callback new: \nX: " << previousMousePosition.x <<
-	"\nY: " << previousMousePosition.y << std::endl;
 }

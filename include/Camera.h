@@ -6,6 +6,8 @@
 
 #include <unordered_map>
 
+#define CAMERA_VELOCITY 0.05f
+
 class Camera {
 	private:
 		Camera() {
@@ -23,6 +25,12 @@ class Camera {
 		void lookTopDown();
 
 		void moveBasedOnKeyPressMap(const std::unordered_map<int, bool>* keyPressMap /*pointer b/c do not want to copy this*/);
+		void rotateFocalPointAboutPositionHorizontal(double angle);
+
+		void moveForwardRelative(double velocity);
+		void moveBackwardRelative(double velocity);
+		void moveLeftRelative(double velocity);
+		void moveRightRelative(double velocity);
 };
 
 #endif

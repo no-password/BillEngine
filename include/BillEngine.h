@@ -4,7 +4,7 @@
 #include "common.h"
 #include "BillEngineMap.h"
 
-#define DEFAULT_FLOOR_HEIGHT -1.0f
+#define DEFAULT_FLOOR_HEIGHT 0.0f
 
 class BillEngine {
 	private:

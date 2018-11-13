@@ -6,6 +6,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <cstdlib>
+#include <chrono>
 
 void keyboard(GLFWwindow* window, int key, int scancode, int action, int mods);
 
@@ -29,6 +30,8 @@ int main() {
 	controls->setCallback(keyboard);
 	std::unordered_map<int, bool>* keyPressMap = &(controls->keyPressMap);
 	win->setControlScheme(controls);
+
+	auto start = Time::now();
 	while (!win->windowShouldClose()) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glMatrixMode(GL_MODELVIEW);
@@ -46,10 +49,14 @@ int main() {
 		win->swapBuffers();
 		glfwPollEvents();
 		cam->moveBasedOnKeyPressMap(keyPressMap);
+		
 		frame++;
-		if (frame % 1000 == 0) {
-			std::cout << "Frame: " << frame<< std::endl;
-		}
+		auto currentFrame = Time::now();
+		fsec timeDelta = currentFrame - start;
+		std::cout << "Time: " << timeDelta.count() << "\nFrame: " << frame 
+		<< "\nFPS: " 
+		<< frame / timeDelta.count()
+		<< std::endl;
 	}
 
 	return 0;
@@ -58,8 +65,6 @@ int main() {
 void keyboard(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	ControlScheme *controls = ControlScheme::getControlScheme();
 	std::unordered_map<int, bool>* keyPressMap = &(controls->keyPressMap);
-
-	std::cout << "Key: " << key << std::endl;
 
 	switch (action) {
 		case (GLFW_PRESS):
