@@ -21,42 +21,47 @@ int main() {
 		return 1;
 	}
 
+	/* Create a new window and make said window in focus */
 	BillEngineWindow* win = new BillEngineWindow(800, 600, "window");
 	win->setContext();
+
+	/* get the camera */
 	Camera *cam = Camera::getCamera();
-	unsigned long frame = 0;
+
+	/* tell the window it needs to render */
 	win->render();
+
+	/* get the current control scheme and set the keyboard callback */
 	ControlScheme *controls = ControlScheme::getControlScheme();
 	controls->setCallback(keyboard);
+
+	/* Camera knows how to act based on keypress map */
 	std::unordered_map<int, bool>* keyPressMap = &(controls->keyPressMap);
+
+	/* Set the window to use the current control scheme */
 	win->setControlScheme(controls);
 
-	auto start = Time::now();
 	while (!win->windowShouldClose()) {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
+		/* clear the previous draw buffer */
 
-		gluLookAt(
-			cam->position.x, cam->position.y, cam->position.z,
-			cam->focalPoint.x, cam->focalPoint.y, cam->focalPoint.z,
-			cam->upDirection.x, cam->upDirection.y, cam->upDirection.z
-		);
+		BillEngine::clearPreviousBuffer();
+		/* tell the camera to look where we want it to look */
+		cam->look();
 
-		glPushMatrix();
+		/* draw things */
 		BillEngine::drawFloor();
-		glPopMatrix();
+		
+		/* swap the draw buffer and poll */
 		win->swapBuffers();
-		glfwPollEvents();
+		win->poll();
+
+		/* move the camera based on keypressMap*/
 		cam->moveBasedOnKeyPressMap(keyPressMap);
 		
-		frame++;
-		auto currentFrame = Time::now();
-		fsec timeDelta = currentFrame - start;
-		std::cout << "Time: " << timeDelta.count() << "\nFrame: " << frame 
-		<< "\nFPS: " 
-		<< frame / timeDelta.count()
-		<< std::endl;
+		/* measure frames per second */
+		BillEngine::nextFrame();
+		float FPS = BillEngine::getFPS();
+		std::cout << "FPS: " << FPS << std::endl;
 	}
 
 	return 0;

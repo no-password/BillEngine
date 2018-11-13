@@ -25,6 +25,13 @@ Camera* Camera::getCamera() {
 	return instance;
 }
 
+void Camera::look() {
+	gluLookAt(
+		position.x, position.y, position.z,
+		focalPoint.x, focalPoint.y, focalPoint.z,
+		upDirection.x, upDirection.y, upDirection.z
+	);
+}
 
 void Camera::lookFirstPerson() {
 	setCameraFirstPersonDefault();
@@ -75,7 +82,7 @@ void Camera::moveBasedOnKeyPressMap(const std::unordered_map<int, bool>* keyPres
 }
 
 void Camera::rotateFocalPointAboutPositionHorizontal(double angle) {
-	rotate(&position, &focalPoint, angle, X);
+	rotate(&position, &focalPoint, angle, AXIS_Y);
 	this->angle += angle;
 }
 

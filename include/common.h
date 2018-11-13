@@ -11,6 +11,12 @@
 typedef std::chrono::high_resolution_clock Time;
 typedef std::chrono::duration<float> fsec;
 
+/* Perspective defaults */
+#define PERS_DEF_ANGLE 45
+#define PERS_DEF_ASPECT 1
+#define PERS_DEF_NEAR  0.1f
+#define PERS_DEF_FAR    1.0f
+
 /* Camera defaults */
 #define  CAM_DEF_LOC_X 0.0f
 #define  CAM_DEF_LOC_Y 0.6f

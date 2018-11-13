@@ -47,6 +47,15 @@ class BillEngine {
 		static int closeMap();
 
 		static void drawFloor();
+
+		static void clearPreviousBuffer();
+
+		/**
+		 * Increment the frame counter, amongst other things 
+		 */
+		static void nextFrame();
+
+		static float getFPS();
 };
 
 

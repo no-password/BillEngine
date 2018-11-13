@@ -6,6 +6,9 @@
 #include "Camera.h"
 
 Point2D previousMousePosition;
+void reshapeCallback(GLFWwindow *w, int width, int height);
+void framebufferSize(GLFWwindow *w, int width, int height);
+void mouseLookCallback(GLFWwindow *w, double xpos, double ypos);
 
 BillEngineWindow::BillEngineWindow(int widthIn, int heightIn, std::string titleIn) {
 	width = widthIn;
@@ -13,10 +16,8 @@ BillEngineWindow::BillEngineWindow(int widthIn, int heightIn, std::string titleI
 	title = titleIn;
 
 	glfwWindow = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
-	glfwSetWindowSizeCallback(glfwWindow, reshape);
+	glfwSetWindowSizeCallback(glfwWindow, reshapeCallback);
 	glfwSetFramebufferSizeCallback(glfwWindow, framebufferSize);
-	framebufferSize(glfwWindow, width, height);
-	reshape(glfwWindow, width, height);
 
 	double mouseX, mouseY;
 	glfwGetCursorPos(glfwWindow, &mouseX, &mouseY);
@@ -25,9 +26,10 @@ BillEngineWindow::BillEngineWindow(int widthIn, int heightIn, std::string titleI
 	glfwSetCursorPosCallback(glfwWindow, mouseLookCallback);
 }
 
+/* Need to call framebuffer/reshape callbacks in order to get the window to initially display something */
 void BillEngineWindow::render() {
 	framebufferSize(glfwWindow, width, height);
-	reshape(glfwWindow, width, height);
+	reshapeCallback(glfwWindow, width, height);
 }
 
 int BillEngineWindow::getWidth() {
@@ -42,10 +44,13 @@ bool BillEngineWindow::windowShouldClose() {
 	return glfwWindowShouldClose(glfwWindow);
 }
 
+void BillEngineWindow::poll() {
+	glfwPollEvents();
+}
+
 /* reshape callback */
-void BillEngineWindow::reshape(GLFWwindow *w, int width, int height)
+void reshapeCallback(GLFWwindow *w, int width, int height)
 {  
-	std::cout << "reshape" << std::endl;
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluPerspective(60, width/(float)height, 1, 10);
@@ -53,7 +58,7 @@ void BillEngineWindow::reshape(GLFWwindow *w, int width, int height)
 }
 
 /* fb callback */
-void BillEngineWindow::framebufferSize(GLFWwindow *w, int width, int height)
+void framebufferSize(GLFWwindow *w, int width, int height)
 {  
   glViewport(0, 0, width, height);
 }
@@ -71,10 +76,13 @@ void BillEngineWindow::setControlScheme(ControlScheme *scheme) {
 	glfwSetKeyCallback(glfwWindow, scheme->keyboardCallback);
 }
 
-void BillEngineWindow::mouseLookCallback(GLFWwindow *w, double xpos, double ypos) {
+/**
+ * Callback function used for mouselook
+ * */
+void mouseLookCallback(GLFWwindow *w, double xpos, double ypos) {
 	Camera* camera = Camera::getCamera();
 	double dMouseX = previousMousePosition.x - xpos;
-	double dMouseY = previousMousePosition.y - ypos;
+	//double dMouseY = previousMousePosition.y - ypos;
 
 	/* Set the focal point to the origin, rotate about the origin, translate the positin back */
 	if (dMouseX != 0) {
@@ -83,4 +91,8 @@ void BillEngineWindow::mouseLookCallback(GLFWwindow *w, double xpos, double ypos
 	}
 	previousMousePosition.x = xpos;
 	previousMousePosition.y = ypos;
+}
+
+void BillEngineWindow::closeWindow() {
+	glfwSetWindowShouldClose(glfwWindow, GLFW_TRUE);
 }

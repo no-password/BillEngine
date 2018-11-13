@@ -21,6 +21,8 @@ class Camera {
 		GLfloat angle;
 
 		static Camera* getCamera();
+		void look();
+
 		void lookFirstPerson();
 		void lookTopDown();
 

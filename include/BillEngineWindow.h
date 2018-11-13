@@ -14,25 +14,31 @@ class BillEngineWindow {
 
 	public:
 		BillEngineWindow(int widthIn, int heightIn, std::string title);
-		int focus();
+		/* reshape this window */
 		int reshape(int widht, int height);
 		int getWidth();
 		int getHeight();
 
+		/* determine if window should close */
 		bool windowShouldClose();
 
 		/* OpenGL activly renders one buffer. and draws to another one in the backgroud */
 		void swapBuffers();
 
+		/* Set the current context to this window */
 		void setContext();
 
+		/* tell the window to start rendering stuff */
 		void render();
 
+		/* Set the control scheme used in the window */
 		void setControlScheme(ControlScheme *scheme);
 
-		static void reshape(GLFWwindow *w, int width, int height);
-		static void framebufferSize(GLFWwindow *w, int width, int height);
-		static void mouseLookCallback(GLFWwindow *w, double xpos, double ypos);
+		/* Close the window */
+		void closeWindow();
+
+		/* Poll user input */
+		void poll();
 };
 
 #endif

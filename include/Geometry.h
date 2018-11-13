@@ -6,20 +6,37 @@
 
 #define d2r(angleDegrees) (angleDegrees * M_PI / 180.0)
 
-typedef enum dimension {X, Y, Z} Dimension;
+typedef enum axis {AXIS_X, AXIS_Y, AXIS_Z} Axis;
 
 typedef struct point3d {
 	GLfloat x, y, z;
 } Point3D;
 
+/**
+ * Computer the scalar distance between two 3D points
+ */
 GLfloat distance(const Point3D* p, const Point3D* q);
+
+/**
+ * Output summary of Point3D struct to std::cout
+ */
 void printPoint(const Point3D p);
-void rotate(const Point3D* fixed, Point3D* target, double theta, Dimension dim);
+
+/**
+ * Rotates a target point about a fixed point one on an axis.
+ * For example, if given AXIS_Y, this function will rotate target along the 
+ * X-Z plane, about the Y dimension of fixed
+ * @param fixed Rotate about this
+ * @param target rotate this
+ * @param theta angle at which to rotate
+ * @param axis rotate about which axis
+ */
+void rotate(const Point3D* fixed, Point3D* target, double theta, Axis axis);
 
 
 typedef struct point2d {
 	GLfloat x, y;
 } Point2D;
 
-//GLfloat distance(const Point2D* p, const Point2D* q);
+GLfloat distance(const Point2D* p, const Point2D* q);
 #endif

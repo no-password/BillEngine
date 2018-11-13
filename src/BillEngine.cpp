@@ -1,10 +1,19 @@
 #include "BillEngine.h"
+#include "Color.h"
 
 #include <iostream>
 #include <cstdio>
 
 GLfloat BillEngine::floorHeight = DEFAULT_FLOOR_HEIGHT;
 BillEngineMap *BillEngine::currentMap = nullptr;
+auto startTime = Time::now();
+unsigned long frameCounter = 1;
+
+static const float FLOOR_DIM_X = 20.0f;
+static const float FLOOR_DIM_Y = 20.0f;
+static const float FLOOR_TILE_SIZE = 0.3f;
+static const Color BLUE(0.15f, 0.15f, 0.7f);
+static const Color GREEN(0.15f, 0.7f, 0.15f);
 
 int BillEngine::init() {
 	initOpenGL();
@@ -12,6 +21,8 @@ int BillEngine::init() {
 	if (!glfwInit()) {
 		return -1;
 	}
+
+	startTime = Time::now();
 
 	return 0;
 }
@@ -26,11 +37,17 @@ void BillEngine::initOpenGL()
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45, 1, 0.1f, 1.0f);
+    gluPerspective(PERS_DEF_ANGLE, PERS_DEF_ASPECT, PERS_DEF_NEAR, PERS_DEF_FAR);
     glMatrixMode(GL_MODELVIEW);
 
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
+}
+
+void BillEngine::clearPreviousBuffer() {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 }
 
 void BillEngine::initGlew() {
@@ -38,19 +55,30 @@ void BillEngine::initGlew() {
 	glewExperimental = GL_TRUE;
 }
 
+void BillEngine::nextFrame() {
+	frameCounter++;
+}
+
+float BillEngine::getFPS() {
+	auto currentTime = Time::now();
+	fsec timeDelta = currentTime - startTime;
+	return frameCounter / timeDelta.count();
+}
+
 /* render the 'floor' */
 void BillEngine::drawFloor()
 {
+	glPushMatrix();
 	float i,j;
 	char flag = 0;
-	for (i = -20.0f; i < 20.0f; i+=0.3f)
+	for (i = -FLOOR_DIM_X; i < FLOOR_DIM_X; i+=FLOOR_TILE_SIZE)
 	{
-		for (j = -20.0f; j < 20.0f; j+=0.3f)
+		for (j = -FLOOR_DIM_Y; j < FLOOR_DIM_Y; j+=FLOOR_TILE_SIZE)
 		{
 			if (flag == 0)
-				glColor3f(0.15f, 0.15f, 0.7f);
+				glColor3f(BLUE.R, BLUE.G, BLUE.B);
 			else
-				glColor3f(0.15f, 0.7f, 0.15f);
+				glColor3f(GREEN.R, GREEN.G, GREEN.B);
 			flag = flag == 0 ? 1 : 0;
 			glBegin(GL_QUADS);
 			glVertex3f(i, floorHeight, j);
@@ -58,10 +86,10 @@ void BillEngine::drawFloor()
 			glVertex3f(i + 1.0f, floorHeight, j + 1.0f);
 			glVertex3f(i + 1.0f, floorHeight, j);
 			glEnd();
-			//printf("Floor: i = %f, j = %f\n", i, j);
 		}
 		flag = flag == 0 ? 1 : 0;
 	}
+	glPopMatrix();
 }
 
 int BillEngine::setFloorHeight(GLfloat height) {
