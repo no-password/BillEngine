@@ -83,33 +83,41 @@ void Camera::moveBasedOnKeyPressMap(const std::unordered_map<int, bool>* keyPres
 
 void Camera::rotateFocalPointAboutPositionHorizontal(double angle) {
 	rotate(&position, &focalPoint, angle, AXIS_Y);
-	this->angle += angle;
+	this->angleHorizontal += angle;
+}
+
+void Camera::rotateFocalPointAboutPositionVertical(double angle) {
+	if ((angle < 0 && angleVertical > -MAX_VERT_ANGLE) ||
+	(angle > 0 && angleVertical < MAX_VERT_ANGLE)) {	
+		rotate(&position, &focalPoint, angle, AXIS_X);
+		this->angleVertical += angle;
+	}
 }
 
 void Camera::moveForwardRelative(double velocity) {
-	position.z -= velocity * cos(d2r(angle));
-	position.x -= velocity * sin(d2r(angle));
-	focalPoint.z -= velocity * cos(d2r(angle));
-	focalPoint.x -= velocity * sin(d2r(angle));
+	position.z -= velocity * cos(d2r(angleHorizontal));
+	position.x -= velocity * sin(d2r(angleHorizontal));
+	focalPoint.z -= velocity * cos(d2r(angleHorizontal));
+	focalPoint.x -= velocity * sin(d2r(angleHorizontal));
 }
 
 void Camera::moveBackwardRelative(double velocity) {
-	position.z += velocity * cos(d2r(angle));
-	position.x += velocity * sin(d2r(angle));
-	focalPoint.z += velocity * cos(d2r(angle));
-	focalPoint.x += velocity * sin(d2r(angle));
+	position.z += velocity * cos(d2r(angleHorizontal));
+	position.x += velocity * sin(d2r(angleHorizontal));
+	focalPoint.z += velocity * cos(d2r(angleHorizontal));
+	focalPoint.x += velocity * sin(d2r(angleHorizontal));
 }
 
 void Camera::moveLeftRelative(double velocity) {
-	position.z += velocity * sin(d2r(angle));
-	position.x -= velocity * cos(d2r(angle));
-	focalPoint.z += velocity * sin(d2r(angle));
-	focalPoint.x -= velocity * cos(d2r(angle));
+	position.z += velocity * sin(d2r(angleHorizontal));
+	position.x -= velocity * cos(d2r(angleHorizontal));
+	focalPoint.z += velocity * sin(d2r(angleHorizontal));
+	focalPoint.x -= velocity * cos(d2r(angleHorizontal));
 }
 
 void Camera::moveRightRelative(double velocity) {
-	position.z -= velocity * sin(d2r(angle));
-	position.x += velocity * cos(d2r(angle));
-	focalPoint.z -= velocity * sin(d2r(angle));
-	focalPoint.x += velocity * cos(d2r(angle));
+	position.z -= velocity * sin(d2r(angleHorizontal));
+	position.x += velocity * cos(d2r(angleHorizontal));
+	focalPoint.z -= velocity * sin(d2r(angleHorizontal));
+	focalPoint.x += velocity * cos(d2r(angleHorizontal));
 }

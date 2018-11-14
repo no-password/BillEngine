@@ -82,12 +82,17 @@ void BillEngineWindow::setControlScheme(ControlScheme *scheme) {
 void mouseLookCallback(GLFWwindow *w, double xpos, double ypos) {
 	Camera* camera = Camera::getCamera();
 	double dMouseX = previousMousePosition.x - xpos;
-	//double dMouseY = previousMousePosition.y - ypos;
+	double dMouseY = previousMousePosition.y - ypos;
 
 	/* Set the focal point to the origin, rotate about the origin, translate the positin back */
 	if (dMouseX != 0) {
 		double theta = dMouseX > 0 ? 1.5f : -1.5f;
 		camera->rotateFocalPointAboutPositionHorizontal(theta);
+	}
+
+	if (dMouseY != 0) {
+		double theta = dMouseY < 0 ? 1.5f : -1.5f;
+		camera->rotateFocalPointAboutPositionVertical(theta);
 	}
 	previousMousePosition.x = xpos;
 	previousMousePosition.y = ypos;

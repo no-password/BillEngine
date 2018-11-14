@@ -26,7 +26,13 @@ void rotate(const Point3D* fixed, Point3D* target, double theta, Axis axis) {		s
 			target->z += fixed->z;
 			break;
 		case AXIS_X:
-			break; //TODO: impliment
+			target->y -= fixed->y;
+			target->z -= fixed->z;
+			target->y = target->z * sin( d2r(theta) ) + target->y * cos( d2r(theta) );
+			target->z = target->z * cos( d2r(theta) ) - target->y * sin( d2r(theta) );
+			target->y += fixed->y;
+			target->z += fixed->z;
+			break;
 		case AXIS_Z:
 			break; //TODO: impliment
 	}	
