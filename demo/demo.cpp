@@ -22,7 +22,7 @@ int main() {
 	}
 
 	/* Create a new window and make said window in focus */
-	BillEngineWindow* win = new BillEngineWindow(800, 600, "window");
+	BillEngineWindow* win = new BillEngineWindow(800, 600, "window", true);
 	win->setContext();
 
 	/* get the camera */
@@ -41,7 +41,7 @@ int main() {
 	/* Set the window to use the current control scheme */
 	win->setControlScheme(controls);
 
-	while (!win->windowShouldClose()) {
+	while (!win->shouldClose()) {
 		/* clear the previous draw buffer */
 
 		BillEngine::clearPreviousBuffer();

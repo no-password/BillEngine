@@ -13,14 +13,14 @@ class BillEngineWindow {
 		GLFWwindow *glfwWindow;
 
 	public:
-		BillEngineWindow(int widthIn, int heightIn, std::string title);
+		BillEngineWindow(int widthIn, int heightIn, std::string titleIn, bool setContext);
 		/* reshape this window */
-		int reshape(int widht, int height);
+		int reshape(int width, int height);
 		int getWidth();
 		int getHeight();
 
 		/* determine if window should close */
-		bool windowShouldClose();
+		bool shouldClose();
 
 		/* OpenGL activly renders one buffer. and draws to another one in the backgroud */
 		void swapBuffers();
@@ -35,7 +35,7 @@ class BillEngineWindow {
 		void setControlScheme(ControlScheme *scheme);
 
 		/* Close the window */
-		void closeWindow();
+		void close();
 
 		/* Poll user input */
 		void poll();

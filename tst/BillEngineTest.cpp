@@ -4,6 +4,7 @@
 #include <cstdlib>
 
 static void before() {
+	std::cout << "[Draw Routine Test]" << std::endl;
 	if (BillEngine::init() != 0) {
 		std::cout << "Failed to initialize engine" << std::endl;
 		exit(EXIT_FAILURE);

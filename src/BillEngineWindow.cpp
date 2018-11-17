@@ -10,7 +10,7 @@ void reshapeCallback(GLFWwindow *w, int width, int height);
 void framebufferSize(GLFWwindow *w, int width, int height);
 void mouseLookCallback(GLFWwindow *w, double xpos, double ypos);
 
-BillEngineWindow::BillEngineWindow(int widthIn, int heightIn, std::string titleIn) {
+BillEngineWindow::BillEngineWindow(int widthIn, int heightIn, std::string titleIn, bool setContext) {
 	width = widthIn;
 	height = heightIn;
 	title = titleIn;
@@ -24,6 +24,9 @@ BillEngineWindow::BillEngineWindow(int widthIn, int heightIn, std::string titleI
 	previousMousePosition.x = mouseX;
 	previousMousePosition.y = mouseY;
 	glfwSetCursorPosCallback(glfwWindow, mouseLookCallback);
+	if (setContext) {
+		this->setContext();
+	}
 }
 
 /* Need to call framebuffer/reshape callbacks in order to get the window to initially display something */
@@ -40,7 +43,15 @@ int BillEngineWindow::getHeight() {
 	return height;
 }
 
-bool BillEngineWindow::windowShouldClose() {
+int BillEngineWindow::reshape(int width, int height) {
+	reshapeCallback(glfwWindow, width, height);
+	this->width = width;
+	this->height = height;
+
+	return 0;
+}
+
+bool BillEngineWindow::shouldClose() {
 	return glfwWindowShouldClose(glfwWindow);
 }
 
@@ -98,6 +109,6 @@ void mouseLookCallback(GLFWwindow *w, double xpos, double ypos) {
 	previousMousePosition.y = ypos;
 }
 
-void BillEngineWindow::closeWindow() {
+void BillEngineWindow::close() {
 	glfwSetWindowShouldClose(glfwWindow, GLFW_TRUE);
 }
