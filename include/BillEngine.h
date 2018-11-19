@@ -19,6 +19,10 @@ class BillEngine {
 
 		static void initGlew();
 
+		/* For adding/removing things from memory table */
+		static void addMemoryObject(MemoryObject *memObject);
+		static void removeMemoryObject(MemoryObject *memObject);
+
 	public:
 		/**
 		 * Initialize OpenGL, amongst other things
@@ -56,6 +60,8 @@ class BillEngine {
 		static void nextFrame();
 
 		static float getFPS();
+
+		
 };
 
 

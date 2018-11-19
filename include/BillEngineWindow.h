@@ -4,8 +4,9 @@
 #include "common.h"
 #include "ControlScheme.h"
 #include "Geometry.h"
+#include "MemoryObject.h"
 
-class BillEngineWindow {
+class BillEngineWindow: public MemoryObject {
 	private:
 		int width;
 		int height;
@@ -14,6 +15,8 @@ class BillEngineWindow {
 
 	public:
 		BillEngineWindow(int widthIn, int heightIn, std::string titleIn, bool setContext);
+		~BillEngineWindow();
+		size_t getSize() const;
 		/* reshape this window */
 		int reshape(int width, int height);
 		int getWidth();

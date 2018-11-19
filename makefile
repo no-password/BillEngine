@@ -33,8 +33,8 @@ $(TARGET): $(OBJ)
 	#$(CXX) $^ -o $(TARGET) $(LDFLAGS) -o $(TARGET)
 	ar rv $(TARGET) $(OBJ)
 
-$(TST_DIR)/%: $(TST_SRC_DIR)/%.$(SRC_EXT) $(OBJ)
-	$(CXX) $(CXX_FLAGS) $(INCLUDE) $(LDFLAGS) -o $@ $< $(OBJ)
+$(TST_DIR)/%: $(TST_SRC_DIR)/%.$(SRC_EXT) $(TARGET)
+	$(CXX) $(CXX_FLAGS) $(INCLUDE) $(LDFLAGS) -o $@ $< $(TARGET)
 
 $(RUNNER): $(TARGET)
 	$(CXX) $(CXX_FLAGS) $(RUNNER_SRC) $(TARGET) $(INCLUDE) $(LDFLAGS) -o $(RUNNER)

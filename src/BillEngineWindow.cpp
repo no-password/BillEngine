@@ -29,6 +29,14 @@ BillEngineWindow::BillEngineWindow(int widthIn, int heightIn, std::string titleI
 	}
 }
 
+BillEngineWindow::~BillEngineWindow() {
+	free(glfwWindow);
+}
+
+size_t BillEngineWindow::getSize() const {
+	return sizeof(BillEngineWindow);
+}
+
 /* Need to call framebuffer/reshape callbacks in order to get the window to initially display something */
 void BillEngineWindow::render() {
 	framebufferSize(glfwWindow, width, height);

@@ -6,6 +6,7 @@
 #include <climits>
 #include <string>
 #include <chrono>
+#include <cstddef>
 
 /* Timing */
 typedef std::chrono::high_resolution_clock Time;
