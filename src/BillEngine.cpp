@@ -6,6 +6,7 @@
 
 GLfloat BillEngine::floorHeight = DEFAULT_FLOOR_HEIGHT;
 BillEngineMap *BillEngine::currentMap = nullptr;
+MemoryTable* BillEngine::memTable = nullptr;
 auto startTime = Time::now();
 unsigned long frameCounter = 1;
 
@@ -24,7 +25,17 @@ int BillEngine::init() {
 
 	startTime = Time::now();
 
+	memTable = MemoryTable::getInstance();
+
 	return 0;
+}
+
+void BillEngine::addMemoryObject(MemoryObject *memObject) {
+	memTable->put(memObject);
+}
+
+void BillEngine::removeMemoryObject(MemoryObject *memObject) {
+	memTable->remove(memObject);
 }
 
 /* initialize opneGL */

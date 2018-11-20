@@ -29,10 +29,6 @@ BillEngineWindow::BillEngineWindow(int widthIn, int heightIn, std::string titleI
 	}
 }
 
-BillEngineWindow::~BillEngineWindow() {
-	free(glfwWindow);
-}
-
 size_t BillEngineWindow::getSize() const {
 	return sizeof(BillEngineWindow);
 }

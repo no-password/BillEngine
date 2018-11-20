@@ -5,8 +5,10 @@
 #include <ostream>
 
 class MemoryObject {
+	protected:
+		MemoryObject();
 	public:
-		virtual ~MemoryObject() {};
+		virtual ~MemoryObject();
 		virtual size_t getSize() const;
 };
 

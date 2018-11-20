@@ -1,13 +1,18 @@
-#ifndef BILLENGINE_H_INCLUDED
+#ifndef BILLENGINE_H
 #define BILLENGINE_H
 
 #include "common.h"
+#include "MemoryObject.h"
+#include "MemoryTable.h"
 #include "BillEngineMap.h"
 
 #define DEFAULT_FLOOR_HEIGHT 0.0f
 
+class MemoryTable;
 class BillEngine {
+
 	private:
+		friend MemoryObject;
 		BillEngine() {}
 
 		//floor texture
@@ -22,6 +27,8 @@ class BillEngine {
 		/* For adding/removing things from memory table */
 		static void addMemoryObject(MemoryObject *memObject);
 		static void removeMemoryObject(MemoryObject *memObject);
+
+		static MemoryTable* memTable;
 
 	public:
 		/**

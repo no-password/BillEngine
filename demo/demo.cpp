@@ -2,6 +2,7 @@
 #include "BillEngine.h"
 #include "BillEngineWindow.h"
 #include "Camera.h"
+#include "MemoryTable.h"
 
 #include <iostream>
 #include <unordered_map>
@@ -41,6 +42,8 @@ int main() {
 	/* Set the window to use the current control scheme */
 	win->setControlScheme(controls);
 
+	MemoryTable* memTable = MemoryTable::getInstance();
+
 	while (!win->shouldClose()) {
 		/* clear the previous draw buffer */
 
@@ -60,8 +63,9 @@ int main() {
 		
 		/* measure frames per second */
 		BillEngine::nextFrame();
-		float FPS = BillEngine::getFPS();
-		std::cout << "FPS: " << FPS << std::endl;
+		//float FPS = BillEngine::getFPS();
+		//std::cout << "FPS: " << FPS << std::endl;
+		memTable->dump(std::cout);
 	}
 
 	return 0;

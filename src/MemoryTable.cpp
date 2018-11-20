@@ -2,7 +2,7 @@
 
 #include <memory>
 
-MemoryTable* instance = nullptr;
+MemoryTable* instance_MemoryTable = nullptr;
 
 MemoryTable::MemoryTable() {
 	this->totalSize = 0;
@@ -19,11 +19,11 @@ void MemoryTable::remove(MemoryObject* memObject) {
 }
 
 MemoryTable* MemoryTable::getInstance() {
-	if (instance == nullptr) {
-		instance = new MemoryTable();
+	if (instance_MemoryTable == nullptr) {
+		instance_MemoryTable = new MemoryTable();
 	}
 
-	return instance;
+	return instance_MemoryTable;
 }
 
 unsigned long MemoryTable::getTotalSize() {
@@ -31,7 +31,8 @@ unsigned long MemoryTable::getTotalSize() {
 }
 
 void MemoryTable::dump(std::ostream& stream) {
+	stream << memorySet.size() << " bytes" << std::endl;
 	for (MemoryObject* memObject: memorySet) {
-		stream << memObject << std::endl;
+		stream << memObject << "\t" << memObject->getSize() << " bytes" << std::endl;
 	}
 }

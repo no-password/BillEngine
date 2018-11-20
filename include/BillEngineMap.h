@@ -1,9 +1,9 @@
-#ifndef BILLENGINEMAP_H_INCLUDED
-#define BILLENGINGMAP_H
+#ifndef BILLENGINEMAP_H
+#define BILLENGINEMAP_H
 
 #include "MemoryObject.h"
 
-class BillEngineMap: public MemoryObject {
+class BillEngineMap {
 	private:
 		int temp;
 

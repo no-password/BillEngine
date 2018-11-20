@@ -40,7 +40,6 @@ $(RUNNER): $(TARGET)
 	$(CXX) $(CXX_FLAGS) $(RUNNER_SRC) $(TARGET) $(INCLUDE) $(LDFLAGS) -o $(RUNNER)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.$(SRC_EXT)
-	@echo "$(CXX) $(CXX_FLAGS) $(INCLUDE) -c -o $@ $<"
 	$(CXX) $(CXX_FLAGS) $(INCLUDE) -c -o $@ $<
 
 test:

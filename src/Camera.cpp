@@ -2,27 +2,27 @@
 #include "Geometry.h"
 #include <cmath>
 
-static Camera* instance = nullptr;
+static Camera* instance_Camera = nullptr;
 
 static void setCameraFirstPersonDefault() {
-	instance->focalPoint.x = CAM_DEF_FOC_X;
-	instance->focalPoint.y = CAM_DEF_FOC_Y;
-	instance->focalPoint.z = CAM_DEF_FOC_Z;
-	instance->position.x = CAM_DEF_LOC_X;
-	instance->position.y = CAM_DEF_LOC_Y;
-	instance->position.z = CAM_DEF_LOC_Z;
-	instance->upDirection.x = CAM_DEF_UP_X;
-	instance->upDirection.y = CAM_DEF_UP_Y;
-	instance->upDirection.z = CAM_DEF_UP_Z;
+	instance_Camera->focalPoint.x = CAM_DEF_FOC_X;
+	instance_Camera->focalPoint.y = CAM_DEF_FOC_Y;
+	instance_Camera->focalPoint.z = CAM_DEF_FOC_Z;
+	instance_Camera->position.x = CAM_DEF_LOC_X;
+	instance_Camera->position.y = CAM_DEF_LOC_Y;
+	instance_Camera->position.z = CAM_DEF_LOC_Z;
+	instance_Camera->upDirection.x = CAM_DEF_UP_X;
+	instance_Camera->upDirection.y = CAM_DEF_UP_Y;
+	instance_Camera->upDirection.z = CAM_DEF_UP_Z;
 }
 
 Camera* Camera::getCamera() {
-	if (instance == nullptr) {
-		instance = new Camera();
+	if (instance_Camera == nullptr) {
+		instance_Camera = new Camera();
 		setCameraFirstPersonDefault();
 	}
 
-	return instance;
+	return instance_Camera;
 }
 
 void Camera::look() {
@@ -39,15 +39,15 @@ void Camera::lookFirstPerson() {
 
 
 void Camera::lookTopDown() {
-	instance->focalPoint.x = 0;	
-	instance->focalPoint.y = 0;
-	instance->focalPoint.z = 0;
-	instance->position.x = 0;
-	instance->position.y = 1.0f;
-	instance->position.z = 0;
-	instance->upDirection.x = 1.0f;
-	instance->upDirection.y = 0.0f;
-	instance->upDirection.z = 0.0f;
+	instance_Camera->focalPoint.x = 0;	
+	instance_Camera->focalPoint.y = 0;
+	instance_Camera->focalPoint.z = 0;
+	instance_Camera->position.x = 0;
+	instance_Camera->position.y = 1.0f;
+	instance_Camera->position.z = 0;
+	instance_Camera->upDirection.x = 1.0f;
+	instance_Camera->upDirection.y = 0.0f;
+	instance_Camera->upDirection.z = 0.0f;
 }
 
 void Camera::moveBasedOnKeyPressMap(const std::unordered_map<int, bool>* keyPressMap /*pointer b/c do not want to copy this*/) {
@@ -67,13 +67,13 @@ void Camera::moveBasedOnKeyPressMap(const std::unordered_map<int, bool>* keyPres
 					this->moveRightRelative(CAMERA_VELOCITY);
 					break;
 				case (GLFW_KEY_SPACE):
-					instance->position.y += 0.05f;
-					instance->focalPoint.y += 0.05f;
+					instance_Camera->position.y += 0.05f;
+					instance_Camera->focalPoint.y += 0.05f;
 					break;
 				case (GLFW_KEY_LEFT_SHIFT):
-					if (instance->position.y > CAM_DEF_LOC_Y + 0.05f) { 
-						instance->position.y -= 0.05f;
-						instance->focalPoint.y -= 0.05f;
+					if (instance_Camera->position.y > CAM_DEF_LOC_Y + 0.05f) { 
+						instance_Camera->position.y -= 0.05f;
+						instance_Camera->focalPoint.y -= 0.05f;
 					}
 					break;
 			}

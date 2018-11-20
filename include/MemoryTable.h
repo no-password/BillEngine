@@ -1,10 +1,12 @@
 #ifndef MEM_TABLE_H
 #define MEM_TABLE_H
 
-#include "common.h"
 #include "BillEngine.h"
 
 #include <set>
+
+class BillEngine;
+/* honestly, fuck this shitty language */
 
 /* Keeps track of total memory used by MemoryObjects, does not free/alloc memory for MemoryObjects */
 class MemoryTable {
@@ -18,7 +20,7 @@ class MemoryTable {
 
 		friend BillEngine;
 	public:
-		MemoryTable* getInstance();
+		static MemoryTable* getInstance();
 		unsigned long getTotalSize();
 		void dump(std::ostream& stream);
 };

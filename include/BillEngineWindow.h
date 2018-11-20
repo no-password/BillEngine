@@ -15,7 +15,10 @@ class BillEngineWindow: public MemoryObject {
 
 	public:
 		BillEngineWindow(int widthIn, int heightIn, std::string titleIn, bool setContext);
-		~BillEngineWindow();
+		~BillEngineWindow() {
+			free(glfwWindow);
+		}
+
 		size_t getSize() const;
 		/* reshape this window */
 		int reshape(int width, int height);
