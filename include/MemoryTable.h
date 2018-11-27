@@ -15,7 +15,7 @@ class MemoryTable {
 		std::set<MemoryObject*> memorySet;
 		unsigned long totalSize;
 
-		void put(MemoryObject* memObject);
+		void put(MemoryObject* memObject, size_t size);
 		void remove(MemoryObject* memObject);
 
 		friend BillEngine;

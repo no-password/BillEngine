@@ -30,8 +30,8 @@ int BillEngine::init() {
 	return 0;
 }
 
-void BillEngine::addMemoryObject(MemoryObject *memObject) {
-	memTable->put(memObject);
+void BillEngine::addMemoryObject(MemoryObject *memObject, size_t size) {
+	memTable->put(memObject, size);
 }
 
 void BillEngine::removeMemoryObject(MemoryObject *memObject) {

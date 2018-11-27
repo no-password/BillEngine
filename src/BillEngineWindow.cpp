@@ -10,7 +10,8 @@ void reshapeCallback(GLFWwindow *w, int width, int height);
 void framebufferSize(GLFWwindow *w, int width, int height);
 void mouseLookCallback(GLFWwindow *w, double xpos, double ypos);
 
-BillEngineWindow::BillEngineWindow(int widthIn, int heightIn, std::string titleIn, bool setContext) {
+BillEngineWindow::BillEngineWindow(int widthIn, int heightIn, std::string titleIn, bool setContext) 
+: MemoryObject(this->getSize()){
 	width = widthIn;
 	height = heightIn;
 	title = titleIn;

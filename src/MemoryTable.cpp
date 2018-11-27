@@ -8,9 +8,9 @@ MemoryTable::MemoryTable() {
 	this->totalSize = 0;
 }
 
-void MemoryTable::put(MemoryObject* memObject) {
+void MemoryTable::put(MemoryObject* memObject, size_t size) {
 	memorySet.insert(memObject);
-	totalSize += memObject->getSize();
+	totalSize += size;
 }
 
 void MemoryTable::remove(MemoryObject* memObject) {
@@ -31,8 +31,11 @@ unsigned long MemoryTable::getTotalSize() {
 }
 
 void MemoryTable::dump(std::ostream& stream) {
-	stream << memorySet.size() << " bytes" << std::endl;
+	size_t total = 0;
 	for (MemoryObject* memObject: memorySet) {
 		stream << memObject << "\t" << memObject->getSize() << " bytes" << std::endl;
+		total += memObject->getSize();
 	}
+	stream << total << " bytes" << std::endl;
+	totalSize = total;
 }
