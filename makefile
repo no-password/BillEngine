@@ -24,7 +24,7 @@ OBJ=$(patsubst $(SRC_DIR)/%,$(BUILD_DIR)/%,$(SRC:.$(SRC_EXT)=.o))
 TST=$(shell find $(TST_SRC_DIR) -type f -name *.$(SRC_EXT))
 TST_OBJ=$(patsubst $(TST_SRC_DIR)/%,$(TST_DIR)/%,$(TST:.$(SRC_EXT)=))
 
-MESS=rm bin/* build/*.o bin/tst/* billengine.a
+MESS=rm bin/* build/*.o billengine.a
 
 all: $(TARGET) $(RUNNER) $(TST_OBJ) test
 $(TARGET): $(OBJ)
