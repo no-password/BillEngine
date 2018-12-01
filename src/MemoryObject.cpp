@@ -1,6 +1,9 @@
 #include "MemoryObject.h"
 #include "BillEngine.h"
 
+void MemoryObject::updateSize() {
+	BillEngine::updateMemoryObjectSize(this);
+}
 MemoryObject::MemoryObject(size_t size) {
 	BillEngine::addMemoryObject(this, size);
 }

@@ -26,6 +26,7 @@ class BillEngine {
 
 		/* For adding/removing things from memory table */
 		static void addMemoryObject(MemoryObject *memObject, size_t size);
+		static void updateMemoryObjectSize(MemoryObject *memObject);
 		static void removeMemoryObject(MemoryObject *memObject);
 
 		static MemoryTable* memTable;

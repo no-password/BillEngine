@@ -38,6 +38,10 @@ void BillEngine::removeMemoryObject(MemoryObject *memObject) {
 	memTable->remove(memObject);
 }
 
+void BillEngine::updateMemoryObjectSize(MemoryObject *memObject) {
+	memTable->update(memObject);
+}
+
 /* initialize opneGL */
 void BillEngine::initOpenGL()
 {

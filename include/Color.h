@@ -6,7 +6,7 @@ class Color {
 		const static float DEFAULT_A;
 	public:
 		float R, G, B, A;
-		Color(float Rin, float Gin, float Bin, float Ain = DEFAULT_A);
+		Color(float Rin = 0.0f, float Gin = 0.0f, float Bin = 0.0f, float Ain = DEFAULT_A);
 		Color blend(const Color, const Color);
 };
 

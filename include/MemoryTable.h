@@ -3,7 +3,7 @@
 
 #include "BillEngine.h"
 
-#include <set>
+#include <unordered_map>
 
 class BillEngine;
 /* honestly, fuck this shitty language */
@@ -12,10 +12,11 @@ class BillEngine;
 class MemoryTable {
 	private:
 		MemoryTable();
-		std::set<MemoryObject*> memorySet;
+		std::unordered_map<MemoryObject*, size_t> memoryMap;
 		unsigned long totalSize;
 
 		void put(MemoryObject* memObject, size_t size);
+		void update(MemoryObject *memObject);
 		void remove(MemoryObject* memObject);
 
 		friend BillEngine;

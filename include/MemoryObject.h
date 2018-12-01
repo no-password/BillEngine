@@ -18,11 +18,10 @@
 class MemoryObject {
 	protected:
 		MemoryObject(size_t size);
+		void updateSize();
 	public:
 		virtual ~MemoryObject();
-		virtual size_t getSize() const {
-			return sizeof(MemoryObject);
-		};
+		virtual size_t getSize() const = 0;
 };
 
 #endif

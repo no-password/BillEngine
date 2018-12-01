@@ -2,6 +2,7 @@
 #define GEOMETRY_H
 
 #include "common.h"
+#include "Color.h"
 #include <cmath>
 
 #define d2r(angleDegrees) (angleDegrees * M_PI / 180.0)
@@ -39,4 +40,15 @@ typedef struct point2d {
 } Point2D;
 
 GLfloat distance(const Point2D* p, const Point2D* q);
+
+/**
+ * Face
+ */
+typedef struct face {
+	int_u8 numPoints; 
+	int* pointIndices;
+	Color* color = nullptr;
+} Face;
+
+void destroyFace(Face* face);
 #endif
