@@ -2,6 +2,8 @@
 #include "test_common.h"
 #include "BillEngine.h"
 #include "Geometry.h"
+#include "BufferCollection.h"
+#include "MatrixCollection.h"
 #include <iostream>
 #include <ostream>
 
@@ -31,26 +33,18 @@ size_t Foo::getSize() const {
 void Foo::dump(std::ostream& stream) {
 	stream << "VERTICES: " << numVertices << std::endl;
 	for (size_t i = 0; i < numVertices; i++) {
-		Point3D* point = &(vertices[i]);
-		stream << point->x << "\t" << point->y << "\t" << point->z <<  std::endl;
-		//TODO: override << for Point3D/Point2D
+		stream << vertices[i] << "\t";
+		if (((i + 1) % 3) == 0) {
+			stream << std::endl;
+		}
 	}
 
 	stream << "FACES: " << numFaces << std::endl;
 	for (size_t i = 0; i < numFaces; i++) {
-		Face* face = &(faces[i]);
-		stream << (int) faces->numPoints << ": ";
-		for (int_u8 i = 0; i < faces->numPoints; i++) {
-			stream << face->pointIndices[i] << " ";
+		stream << faces[i] << "\t";
+		if (((i + 1) % pointsPerFace) == 0) {
+			stream << std::endl;
 		}
-
-		if (face->color != nullptr) {
-			stream << " | "<< face->color->R << " ";
-			stream << face->color->G << " "; 
-			stream << face->color->B;
-		}
-
-		stream << std::endl;
 	}
 }
 

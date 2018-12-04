@@ -1,5 +1,6 @@
 #include "BillEngine.h"
 #include "Color.h"
+#include "Shader.h"
 
 #include <iostream>
 #include <cstdio>
@@ -16,9 +17,11 @@ static const float FLOOR_TILE_SIZE = 0.3f;
 static const Color BLUE(0.15f, 0.15f, 0.7f);
 static const Color GREEN(0.15f, 0.7f, 0.15f);
 
-int BillEngine::init() {
-	initOpenGL();
+int BillEngine::init(BufferCollection* bufs, MatrixCollection* mat) {
+	std::cout << "101\n";
+	initOpenGL(bufs, mat);
 	initGlew();
+	std::cout << "199\n";
 	if (!glfwInit()) {
 		return -1;
 	}
@@ -43,7 +46,7 @@ void BillEngine::updateMemoryObjectSize(MemoryObject *memObject) {
 }
 
 /* initialize opneGL */
-void BillEngine::initOpenGL()
+void BillEngine::initOpenGL(BufferCollection* bufs, MatrixCollection* mat)
 {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glColor3f(1.0f, 1.0f, 1.0f);
@@ -57,6 +60,14 @@ void BillEngine::initOpenGL()
 
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
+	std::cout << "102\n";
+	bufs->program = initshader("vertex_shader.glsl", "fragment_shader1.glsl");
+	std::cout << "103\n";
+    bufs->Modelview = glGetUniformLocation(bufs->program, "modelview");
+	std::cout << "104\n";
+    bufs->Projection = glGetUniformLocation(bufs->program, "projection");
+	std::cout << "105\n";
+
 }
 
 void BillEngine::clearPreviousBuffer() {

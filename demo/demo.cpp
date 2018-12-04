@@ -3,6 +3,9 @@
 #include "BillEngineWindow.h"
 #include "Camera.h"
 #include "MemoryTable.h"
+#include "MatrixCollection.h"
+#include "BufferCollection.h"
+#include "VertexFormattedObject.h"
 
 #include <iostream>
 #include <unordered_map>
@@ -11,12 +14,17 @@
 
 void keyboard(GLFWwindow* window, int key, int scancode, int action, int mods);
 
+MatrixCollection* mats = new MatrixCollection();
+BufferCollection* bufs = new BufferCollection();
+
 int main() {
-	if (BillEngine::init() != 0) {
+	std::cout << "100" << std::endl;
+	if (BillEngine::init(bufs, mats) != 0) {
 		std::cout << "Problem initializing engine" << std::endl;
 		return 1;
 	}
 
+	std::cout << "200" << std::endl;
 	if (glGetError() != GL_NO_ERROR) {
 		std::cout << "OpenGL error" << std::endl;
 		return 1;
@@ -44,6 +52,8 @@ int main() {
 
 	MemoryTable* memTable = MemoryTable::getInstance();
 
+	//VertexFormattedObject* cube = new VertexFormattedObject("tst_res/cube.off", OFF);
+
 	while (!win->shouldClose()) {
 		/* clear the previous draw buffer */
 
@@ -66,6 +76,7 @@ int main() {
 		//float FPS = BillEngine::getFPS();
 		//std::cout << "FPS: " << FPS << std::endl;
 		memTable->dump(std::cout);
+		//cube->render(bufs, mats);
 	}
 
 	return 0;

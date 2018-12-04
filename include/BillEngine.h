@@ -4,6 +4,8 @@
 #include "common.h"
 #include "MemoryObject.h"
 #include "MemoryTable.h"
+#include "MatrixCollection.h"
+#include "BufferCollection.h"
 #include "BillEngineMap.h"
 
 #define DEFAULT_FLOOR_HEIGHT 0.0f
@@ -20,7 +22,7 @@ class BillEngine {
 		static BillEngineMap* currentMap;
 
 		/* Auxillary methods */
-		static void initOpenGL();
+		static void initOpenGL(BufferCollection* bufs, MatrixCollection* mat);
 
 		static void initGlew();
 
@@ -35,7 +37,7 @@ class BillEngine {
 		/**
 		 * Initialize OpenGL, amongst other things
 		 */
-		static int init();
+		static int init(BufferCollection* bufs, MatrixCollection* mat);
 
 		/**
 		 * Set the floor texture
